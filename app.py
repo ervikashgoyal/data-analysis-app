@@ -27,7 +27,7 @@ if uploaded_file is not None:
         st.write(f"Number of Rows: {data.shape[0]}")
         st.write(f"Number of Columns: {data.shape[1]}")
         st.write("Data Types:")
-        st.write(data.dtypes)
+        
         st.write("Descriptive Statistics:")
         st.write(data.describe())
 
