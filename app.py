@@ -6,7 +6,7 @@ import seaborn as sns
 import plotly.express as px
 
 # Title and overview
-st.title("Vikash DATA Services - Data Analysis and Visualization")
+st.title("vikashDATAservices - Data Analysis and Visualization")
 st.write("Upload a Dataset")
 
 # File Upload
@@ -21,6 +21,17 @@ if uploaded_file is not None:
             return data
 
         data = load_data()
+
+        # Data Cleaning and Type Conversion
+        def clean_and_convert_data(df):
+            for col in df.columns:
+                if df[col].dtype == 'object':
+                    df[col] = pd.to_numeric(df[col], errors='coerce')
+                elif df[col].dtype == 'float64':
+                    df[col] = df[col].astype(float)
+            return df
+
+        data = clean_and_convert_data(data)
 
         # Data Description
         st.write("Data Description")
