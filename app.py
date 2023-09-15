@@ -73,11 +73,7 @@ if uploaded_file is not None:
             fig = px.histogram(data, x=col)
             st.plotly_chart(fig)
 
-        # Correlation Heatmap
-        st.write("## Correlation Heatmap")
-        corr_matrix = data.corr()
-        st.write(sns.heatmap(corr_matrix, annot=True))
-
+      
         # Multivariate Analysis
         st.write("## Multivariate Analysis")
 
