@@ -7,7 +7,7 @@ import plotly.express as px
 
 # Title and overview
 st.title("vikashDATAservices - Data Analysis and Visualization")
-st.write("Upload a Dataset")
+st.write("## Upload a Dataset")
 
 # File Upload
 uploaded_file = st.file_uploader("Upload a CSV or Excel file", type=["csv", "xlsx"])
@@ -22,19 +22,8 @@ if uploaded_file is not None:
 
         data = load_data()
 
-        # Data Cleaning and Type Conversion
-        def clean_and_convert_data(df):
-            for col in df.columns:
-                if df[col].dtype == 'object':
-                    df[col] = pd.to_numeric(df[col], errors='coerce')
-                elif df[col].dtype == 'float64':
-                    df[col] = df[col].astype(float)
-            return df
-
-        data = clean_and_convert_data(data)
-
         # Data Description
-        st.write("Data Description")
+        st.write("## Data Description")
         st.write(f"Number of Rows: {data.shape[0]}")
         st.write(f"Number of Columns: {data.shape[1]}")
         st.write("Data Types:")
@@ -43,32 +32,32 @@ if uploaded_file is not None:
         st.write(data.describe())
 
         # Data Overview
-        st.write("Data Overview")
+        st.write("## Data Overview")
         st.write(data.head())
 
         # Object Data Type Analysis
-        st.write("Object Data Type Analysis")
+        st.write("## Object Data Type Analysis")
         object_cols = data.select_dtypes(include="object").columns
         for col in object_cols:
-            st.write(f"{col} Analysis")
+            st.write(f"### {col} Analysis")
             st.write(f"Number of Unique Values: {data[col].nunique()}")
             st.write("Top Value Counts:")
             st.write(data[col].value_counts())
 
         # Categorical Column Selection
-        st.write("Categorical Column Analysis")
+        st.write("## Categorical Column Analysis")
         categorical_cols = st.multiselect("Select categorical columns for analysis", object_cols)
 
         if categorical_cols:
             # Univariate Categorical Analysis
-            st.write("Univariate Categorical Analysis")
+            st.write("### Univariate Categorical Analysis")
             for col in categorical_cols:
-                st.write(f"{col} Value Counts")
+                st.write(f"#### {col} Value Counts")
                 fig = px.bar(data, x=col, title=f"{col} Value Counts")
                 st.plotly_chart(fig)
 
             # Multivariate Categorical Analysis with Hue
-            st.write("Multivariate Categorical Analysis")
+            st.write("### Multivariate Categorical Analysis")
             x_col = st.selectbox("Select X-axis column", categorical_cols)
             hue_col = st.selectbox("Select Hue column (for color differentiation)", categorical_cols, key="hue_selection")
 
@@ -77,53 +66,53 @@ if uploaded_file is not None:
                 st.plotly_chart(fig)
 
         # Univariate Analysis
-        st.write("Univariate Analysis")
+        st.write("## Univariate Analysis")
         numeric_cols = data.select_dtypes(include=np.number).columns
         for col in numeric_cols:
-            st.subheader(f"{col} Distribution")
+            st.subheader(f"### {col} Distribution")
             fig = px.histogram(data, x=col)
             st.plotly_chart(fig)
 
         # Correlation Heatmap
-        st.write("Correlation Heatmap")
+        st.write("## Correlation Heatmap")
         corr_matrix = data.corr()
         st.write(sns.heatmap(corr_matrix, annot=True))
 
         # Multivariate Analysis
-        st.write("Multivariate Analysis")
+        st.write("## Multivariate Analysis")
 
         # Pairplot for selected columns (customize this section)
         selected_columns = st.multiselect("Select columns for the pairplot", numeric_cols)
         if selected_columns:
-            st.write("Pairplot")
+            st.write("### Pairplot")
             pairplot = sns.pairplot(data[selected_columns])
             st.pyplot(pairplot)
 
         # Scatter Plot (customize this section)
-        st.write("Scatter Plot")
+        st.write("### Scatter Plot")
         x_col = st.selectbox("Select X-axis column", numeric_cols)
         y_col = st.selectbox("Select Y-axis column", numeric_cols)
         fig = px.scatter(data, x=x_col, y=y_col)
         st.plotly_chart(fig)
 
         # Data Insights and Suggestions (customize this section)
-        st.write("Data Insights and Suggestions")
+        st.write("## Data Insights and Suggestions")
 
         # Null Values
         null_counts = data.isnull().sum()
-        st.write("Null Values")
+        st.write("### Null Values")
         st.write(null_counts)
 
         # Outliers (customize this section)
-        st.write("Outliers Detection")
+        st.write("### Outliers Detection")
         # You can add your code here to detect and display outliers
 
         # Suggestions (customize this section)
-        st.write("Suggestions")
+        st.write("### Suggestions")
         # Provide suggestions based on the analysis and findings
 
         # Contact Developer Section
-        st.write("Contact Developer")
+        st.write("## Contact Developer")
         st.write("If you have any questions or feedback, please feel free to contact the developer:")
         st.write("- Developer Name: Vikash Goyal")
         st.write("- LinkedIn Profile: [Vikash Goyal's LinkedIn](https://www.linkedin.com/in/vikash-goyal-20692924b)")
