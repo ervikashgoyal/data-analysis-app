@@ -6,7 +6,7 @@ import seaborn as sns
 import plotly.express as px
 
 # Title and overview
-st.title("vikashDATAservices - Data Analysis and Visualization")
+st.title("Vikash Data Services - Data Analysis and Visualization")
 st.write("## Upload a Dataset")
 
 # File Upload
